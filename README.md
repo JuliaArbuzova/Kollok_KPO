@@ -204,45 +204,20 @@ REST: Ограничен паттерном запрос-ответ, что за
 gRPC предоставляет автоматическую генерацию кода для клиентов и серверов на различных языках программирования, что облегчает разработку и уменьшает вероятность ошибок.
 REST: Требует ручной разработки кода для обработки HTTP-запросов и ответов, что может быть более трудоемким и подверженным ошибкам процессом.
 
-**Основные типы потоковой передачи в gRPC**
-1. Unary RPC:
+Основные типы потоковой передачи в gRPC:
 
-Обычный запрос-ответ, при котором клиент отправляет один запрос и получает один ответ от сервера.
-![image](https://github.com/JuliaArbuzova/Kollok_KPO/assets/154761916/d2761b28-546b-4a9e-b9e8-fba9f05d172e)
+Unary: Клиент отправляет один запрос и получает один ответ.
+Пример: Получение данных пользователя по его идентификатору.
 
-2. Server Streaming RPC:
+Server streaming: Клиент отправляет один запрос и получает поток ответов.
+Пример: Получение списка всех транзакций пользователя.
 
-Клиент отправляет один запрос серверу и получает поток ответов.
+Client streaming: Клиент отправляет поток запросов и получает один ответ.
+Пример: Отправка батча логов на сервер.
 
-service ExampleService {
-  rpc ServerStreamingCall(RequestMessage) returns (stream ResponseMessage);
-}
+Bidirectional streaming: Клиент и сервер обмениваются потоками сообщений.
+Пример: Реализация чата.
 
-3. Client Streaming RPC:
-
-Клиент отправляет поток запросов серверу и получает один ответ от сервера.
-
-service ExampleService {
-  rpc ClientStreamingCall(stream RequestMessage) returns (ResponseMessage);
-}
-
-4. Bidirectional Streaming RPC:
-
-Клиент и сервер обмениваются потоками сообщений. Обе стороны могут читать и писать сообщения в любой момент времени.
-
-service ExampleService {
-  rpc BidiStreamingCall(stream RequestMessage) returns (stream ResponseMessage);
-}
-
-**Примеры использования каждого типа потоковой передачи**
-
-![image](https://github.com/JuliaArbuzova/Kollok_KPO/assets/154761916/c3ff38e3-e54d-414a-8a07-7b13769e438c)
-
-![image](https://github.com/JuliaArbuzova/Kollok_KPO/assets/154761916/4f57150e-6514-4d2e-a207-be46d16f3c8a)
-
-![image](https://github.com/JuliaArbuzova/Kollok_KPO/assets/154761916/a3c0beff-b268-4b39-a972-445d08e16545)
-
-![image](https://github.com/JuliaArbuzova/Kollok_KPO/assets/154761916/dae714be-6a4a-4c16-b981-16afa6c670e8)
 
 gRPC предлагает мощный и эффективный способ реализации RPC, решая многие проблемы RESTful API, такие как производительность и поддержка сложных сценариев обмена данными в реальном времени. Различные типы потоковой передачи в gRPC позволяют гибко подходить к различным задачам, от простых запросов до сложных двунаправленных потоков.
 
